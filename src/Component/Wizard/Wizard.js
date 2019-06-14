@@ -7,41 +7,47 @@ class Wizard extends Component {
   constructor(props){
     super(props)
     this.state = ({
-      houses: [],
       name: '',
       address: '',
       city: '',
       state: '',
-      zip: 0,
-      input: ''
+      zip: 0
     })
-    // this.add = this.add.bind(this)
+    this.createHouse = this.createHouse.bind(this)
   }
 
-  handleValue = (e) => {
-    const { value, name } = e.target
+  handleName(val){
     this.setState({
-      [name]: value
+      name: val
     })
   }
-;
-
-componentDidMount(){
-  axios.get('/api/house').then(res => {
-    this.setState({
-      houses: res.data
-    })
-  })
-}
-
- 
   
-  createHouse(){
-    const {input} = this.state
-    axios.post('/api/house', {house: input}).then(res => {
+  handleAddress(val){
+    this.setState({
+      address: val
+    })
+  }
+  handleCity(val){
+    this.setState({
+      city: val
+    })
+  }
+  handleState(val){
+    this.setState({
+      state: val
+    })
+  }
+  handleZip(val){
+    this.setState({
+      zip: val
+    })
+  }
+
+  
+  createHouse  () {
+    axios.post('/api/house').then(res => {
       this.setState({
-        houses: res.data,
-        input: ''
+        houses: res.data
       })
     })
   }
@@ -51,47 +57,17 @@ componentDidMount(){
     return(
       <div>
         <h1>Add New Listing</h1>
-        <input 
-          type="text"
-          placeholder="Property Name:"
-          name='name'
-          value={this.state.name}
-          onChange={this.handleValue}
-        />
-        <input 
-          type="text"
-          placeholder="Address:"
-          name='address'
-          value={this.state.address}
-          onChange={this.handleValue}
-        />
-        <input 
-          type="text"
-          placeholder="City:"
-          name='city'
-          value={this.state.city}
-          onChange={this.handleValue}
-        />
-        <input 
-          type="text"
-          placeholder="State: "
-          name='state'
-          value={this.state.state}
-          onChange={this.handleValue}
-        />
-        <input 
-          type="text"
-          placeholder="Zip:"
-          name='zip'
-          value={this.state.zip}
-          onChange={this.handleValue}
-        />
-      <div>
+        <input type="text" placeholder="Name" onChange={(e) => this.handleName(e.target.value)}/>
+        <input type="text" placeholder="Address" onChange={(e) => this.handleAddress(e.target.value)}/>
+        <input type="text" placeholder="State" onChange={(e) => this.handleState(e.target.value)}/>
+        <input type="text" placeholder="City" onChange={(e) => this.handleCity(e.target.value)}/>
+        <input type="number" placeholder="Zip" onChange={(e) => this.handleZip(e.target.value)}/>
         <div>
-         <Link to="/" ><button onClick={() => this.createHouse()}>Complete</button> </Link>
-        </div>  
-          <Link to="/"><button>cancel</button></Link>
-      </div>
+          <div>
+            <Link to="/" > <button onClick={this.createHouse}>Complete</button> </Link>
+          </div>  
+            <Link to="/"><button>cancel</button></Link>
+        </div>
       </div>
     )
   }

@@ -14,11 +14,11 @@ class House extends Component {
     return(
       <div className="container">
         <ul className="move-lines">
-          <li> <p>Property Name: {house.name}</p> </li> 
-          <li> <p>Address: {house.address}</p> </li> 
-          <li> <p>City: {house.city}</p> </li> 
-          <li> <p>State: {house.state}</p> </li> 
-          <li> <p>Zip: {house.zip}</p> </li>        
+          <div> <p>Property Name: {house.name}</p> </div> 
+          <div> <p>Address: {house.address}</p> </div> 
+          <div> <p>City: {house.city}</p> </div> 
+          <div> <p>State: {house.state}</p> </div> 
+          <div> <p>Zip: {house.zip}</p> </div>        
           <button onClick={() => this.props.deleteHouse(house.house_id)}>Delete</button>
         </ul> 
       </div>
