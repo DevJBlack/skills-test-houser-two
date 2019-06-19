@@ -7,6 +7,7 @@ module.exports = {
   },
   createHouse: (req, res) => {
     const db = req.app.get('db')
+    console.log(req.body)
     db.create_houses(req.body).then((response) => {
       res.status(200).send(response)
     }).catch(err => console.log(err))

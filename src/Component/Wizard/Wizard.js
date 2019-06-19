@@ -6,13 +6,13 @@ import './Wizard.css'
 class Wizard extends Component {
   constructor(props){
     super(props)
-    this.state = ({
+    this.state = {
       name: '',
       address: '',
       city: '',
       state: '',
       zip: 0
-    })
+    }
     this.createHouse = this.createHouse.bind(this)
   }
 
@@ -45,7 +45,7 @@ class Wizard extends Component {
 
   
   createHouse  () {
-    axios.post('/api/house').then(res => {
+    axios.post('/api/house', this.state).then(res => {
       this.setState({
         houses: res.data
       })
